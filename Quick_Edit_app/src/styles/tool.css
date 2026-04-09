@@ -1,0 +1,211 @@
+/* Tool Selector Page */
+.tools-selector {
+    min-height: calc(100vh - 140px);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+  }
+  
+  .canvas-preview {
+    background: white;
+    border-radius: 16px;
+    padding: 1rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    max-width: 100%;
+    overflow: auto;
+  }
+  
+  .canvas-preview canvas {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+  }
+  
+  .tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  
+  .tool-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    padding: 1.5rem;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.2s;
+  }
+  
+  .tool-card:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.2);
+  }
+  
+  .tool-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+  
+  .tool-card h3 {
+    color: white;
+    margin: 0;
+    font-size: 1.2rem;
+  }
+  
+  /* Individual Tool Pages */
+  .tool-container {
+    min-height: calc(100vh - 140px);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+  }
+  
+  .tool-container h2 {
+    color: white;
+    margin: 0;
+  }
+  
+  .tool-container canvas {
+    max-width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    background: white;
+  }
+  
+  .tool-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 1.5rem;
+    border-radius: 24px;
+  }
+  
+  .tool-controls button {
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 40px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  
+  .tool-controls button:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(79, 70, 229, 0.4);
+  }
+  
+  .tool-controls button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  .tool-controls label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: white;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 0.5rem 1rem;
+    border-radius: 40px;
+  }
+  
+  .tool-controls input[type="range"] {
+    width: 150px;
+  }
+
+  /* Tool cards hover effect */
+.tool-card {
+    cursor: pointer;
+    transition: transform 0.2s, background 0.2s;
+  }
+  .tool-card:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.2);
+  }
+  
+  /* Buttons hover */
+  .tool-controls button {
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .tool-controls button:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(79, 70, 229, 0.4);
+  }
+  
+  /* Error message */
+  .error-message {
+    background: rgba(255, 0, 0, 0.8);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+  }
+
+  .loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.7);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    color: white;
+    font-size: 1.2rem;
+  }
+  .spinner {
+    border: 4px solid rgba(255,255,255,0.3);
+    border-top: 4px solid white;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin-bottom: 1rem;
+  }
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  .info-message {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(5px);
+    padding: 0.5rem 1rem;
+    border-radius: 12px;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    color: #fff;
+    text-align: center;
+  }
+
+  .error-message {
+    background: #ff4444;
+    color: white;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    margin: 1rem 0;
+    text-align: center;
+  }
+
+  .tool-controls button {
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    margin: 0 0.5rem;
+  }
