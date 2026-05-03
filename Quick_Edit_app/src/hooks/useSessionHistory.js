@@ -4,7 +4,7 @@ import { sessionApi } from '../utils/api';
 export function useSessionHistory() {
   const recordTool = useCallback(async (toolName) => {
     try {
-      // Ensure we have a session
+      
       let session;
       try {
         session = await sessionApi.get();

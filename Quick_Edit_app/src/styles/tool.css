@@ -209,3 +209,76 @@
     background: linear-gradient(135deg, #4f46e5, #7c3aed);
     margin: 0 0.5rem;
   }
+
+  /* New control panel layout similar to Cartoon tool */
+.tool-controls-group {
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 24px;
+  padding: 1rem 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 1rem;
+  width: 100%;
+  max-width: 1000px;
+}
+
+.control-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  background: rgba(0,0,0,0.3);
+  padding: 0.5rem 1rem;
+  border-radius: 16px;
+  min-width: 150px;
+}
+
+.control-item label {
+  color: white;
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+}
+
+.control-item select,
+.control-item input {
+  background: rgba(255,255,255,0.9);
+  border: none;
+  border-radius: 8px;
+  padding: 0.4rem;
+  cursor: pointer;
+}
+
+.control-item input[type="range"] {
+  width: 100%;
+}
+
+.action-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.action-buttons button {
+  background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  padding: 0.6rem 1.2rem;
+  font-size: 0.9rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.action-buttons button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(79,70,229,0.4);
+}
+
+.tool-container h2 {
+  color: white;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  margin-bottom: 1rem;
+}

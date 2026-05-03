@@ -1,4 +1,4 @@
-// client/src/components/CanvasPreview.jsx
+
 import { useEffect, useRef } from 'react';
 import { useImage } from '../contexts/ImageContext';
 
@@ -14,7 +14,7 @@ export default function CanvasPreview({ onCanvasReady }) {
     canvas.current.height = originalImage.height;
     ctx.drawImage(originalImage, 0, 0);
     if (onCanvasReady) onCanvasReady(canvas.current);
-  }, [originalImage, canvas, onCanvasReady]); // added dependencies
+  }, [originalImage, canvas, onCanvasReady]); 
 
   return <canvas ref={canvas} className="main-canvas"></canvas>;
 }

@@ -7,9 +7,7 @@ import '../styles/tool.css';
 
 const tools = [
   { name: 'Resize', path: '/tools/resize', icon: '🔍' },
-  { name: 'Rotate', path: '/tools/rotate', icon: '🔄' },
   { name: 'Grayscale', path: '/tools/grayscale', icon: '⚫' },
-  { name: 'Crop', path: '/tools/crop', icon: '✂️' },
   { name: 'Background Removal', path: '/tools/remove-bg', icon: '🎭' },
   { name: 'Cartoon Effect', path: '/tools/cartoon', icon: '🎨' },
 ];

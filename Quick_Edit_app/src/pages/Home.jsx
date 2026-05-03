@@ -9,10 +9,9 @@ export default function Home() {
   const features = [
     { name: 'Background Removal', icon: '🎭', path: '/editor' },
     { name: 'Cartoon Effect', icon: '🎨', path: '/editor' },
-    { name: 'Crop', icon: '✂️', path: '/editor' },
     { name: 'Grayscale', icon: '⚫', path: '/editor' },
     { name: 'Resize', icon: '🔍', path: '/editor' },
-    { name: 'Rotate', icon: '🔄', path: '/editor' },
+    
   ];
 
   return (
