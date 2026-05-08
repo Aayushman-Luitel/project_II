@@ -2,16 +2,33 @@ const express = require('express');
 const cors = require('cors');
 const session = require('express-session');
 const SQLiteStore = require('connect-sqlite3')(session);
+const path = require('path');
 
 const app = express();
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
+
+// Allowed origins for CORS (add your Netlify URL here)
+const allowedOrigins = [
+  'http://localhost:5173',
+  'https://your-quickeditz.netlify.app'  // ⚠️ REPLACE with your actual Netlify URL
+];
 
 app.use(cors({
-  origin: 'http://localhost:5173',
+  origin: function(origin, callback) {
+    // Allow requests with no origin (like mobile apps or curl)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.indexOf(origin) === -1) {
+      const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+  },
   credentials: true,
 }));
+
 app.use(express.json({ limit: '50mb' }));
 
+// SQLite store configuration
 const sessionStore = new SQLiteStore({
   db: 'sessions.db',
   table: 'sessions',
@@ -20,14 +37,21 @@ const sessionStore = new SQLiteStore({
 });
 sessionStore.on('error', (err) => console.error('Store error:', err));
 
+// Session middleware
 app.use(session({
   store: sessionStore,
-  secret: 'your-secret-key-change-this',
+  secret: process.env.SESSION_SECRET || 'your-secret-key-change-this',
   resave: false,
   saveUninitialized: false,
-  cookie: { maxAge: 7 * 24 * 60 * 60 * 1000, httpOnly: true, secure: false }
+  cookie: {
+    maxAge: 7 * 24 * 60 * 60 * 1000, // 1 week
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production', // true on HTTPS (Render/Netlify)
+    sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax', // required for cross-origin
+  }
 }));
 
+// Helper function to initialize session data
 function initSession(req) {
   let changed = false;
   if (!req.session.tool) {
@@ -45,8 +69,8 @@ function initSession(req) {
   return changed;
 }
 
+// CREATE session
 app.post('/api/sessions', (req, res) => {
-  // Ensure session exists (if new, it will have an id)
   if (!req.session.id) {
     return res.status(500).json({ error: 'Session ID missing' });
   }
@@ -74,6 +98,7 @@ app.post('/api/sessions', (req, res) => {
   }
 });
 
+// READ session
 app.get('/api/sessions', (req, res) => {
   if (!req.session || !req.session.id) {
     return res.status(404).json({ error: 'No active session' });
@@ -87,6 +112,7 @@ app.get('/api/sessions', (req, res) => {
   });
 });
 
+// UPDATE session
 app.put('/api/sessions', (req, res) => {
   if (!req.session || !req.session.id) {
     return res.status(404).json({ error: 'No active session' });
@@ -112,6 +138,7 @@ app.put('/api/sessions', (req, res) => {
   });
 });
 
+// DELETE session
 app.delete('/api/sessions', (req, res) => {
   if (!req.session || !req.session.id) {
     return res.status(404).json({ error: 'No active session' });
@@ -122,4 +149,10 @@ app.delete('/api/sessions', (req, res) => {
   });
 });
 
+// Health check endpoint (useful for Render)
+app.get('/health', (req, res) => {
+  res.json({ status: 'OK', timestamp: new Date().toISOString() });
+});
+
+// Start server
 app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
